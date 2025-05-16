@@ -42,7 +42,7 @@ def convert_to_markdown(readme_data):
     current_date = current_datetime.date()
 
     prompt = f"""
-The following README is written in {readme_data['format']}. Convert it into clean, well-structured Markdown, but don’t wrap the result in code blocks or triple backticks.
+The following README is written in {readme_data['format']}. Convert it into clean, well-structured Markdown, but don’t wrap the result in code blocks or triple backticks. Italicize the name of the the journal.
 Preserve all key formatting: Headings, bullet points, code blocks, and tables. Exclude irrelevant metadata.
 Do not rephrase or rewrite the content. At the end, add a changelog entry: '{current_date} – Standardized to Markdown.'
 
@@ -91,14 +91,15 @@ def update_zip_with_markdown(original_zip_path, readme_data, markdown_content):
         print(f"Updated ZIP created at: {updated_zip_path}")
         return updated_zip_path
 
-model_id = "149914"  # Example model ID
+model_id = "138382"  # Example model ID
 zip_path = f"/Users/riesakai/Desktop/MCDOUGAL_LAB/model_{model_id}.zip"
 readme_data = extract_readme_from_zip(zip_path)
 if "error" not in readme_data:
     markdown_content = convert_to_markdown(readme_data)
-    new_readme_path = os.path.join(f"{model_id}_README.md")
+    new_readme_path = f"/Users/riesakai/Desktop/MCDOUGAL_LAB/readme-reformatting/{model_id}_README.md"
     with open(new_readme_path, "w", encoding="utf-8") as f:
         f.write(markdown_content)
+        print(f"README file converted for model {model_id} at {new_readme_path}.")
 else:
     print(f"README file not found for model {model_id}.")
 
