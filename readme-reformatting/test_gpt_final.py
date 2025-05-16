@@ -42,7 +42,7 @@ def convert_to_markdown(readme_data):
     current_date = current_datetime.date()
 
     prompt = f"""
-The following README is written in {readme_data['format']}. Convert it into clean, well-structured Markdown, but don’t wrap the result in code blocks or triple backticks. Italicize the name of the the journal.
+The following README is written in {readme_data['format']}. Convert it into clean, well-structured Markdown, but don’t wrap the result in code blocks or triple backticks. Italicize the names of the journals.
 Preserve all key formatting: Headings, bullet points, code blocks, and tables. Exclude irrelevant metadata.
 Do not rephrase or rewrite the content. At the end, add a changelog entry: '{current_date} – Standardized to Markdown.'
 
