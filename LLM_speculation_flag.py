@@ -16,7 +16,7 @@ def is_speculation(sections):
     for section in sections:
         text_lower = section.lower()
         count = sum(word in text_lower for word in speculative_words)
-        if count >= 2:
+        if count >= 1:
             results.append(f'{section}\nFLAG: SPECULATION\n')
         else:
             results.append(f'{section}\nFLAG: CORRECT\n')
