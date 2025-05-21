@@ -41,10 +41,20 @@ def convert_to_markdown(readme_data):
     current_datetime = datetime.datetime.now()
     current_date = current_datetime.date()
 
-    prompt = f"""
-The following README is written in {readme_data['format']}. Convert it into clean, well-structured Markdown, but don’t wrap the result in code blocks or triple backticks. Italicize the names of the journals.
-Preserve all key formatting: Headings, bullet points, code blocks, and tables. Exclude irrelevant metadata.
-Do not rephrase or rewrite the content. At the end, add a changelog entry: '{current_date} – Standardized to Markdown.'
+    pprompt = f"""
+Instructions:
+    • Use proper Markdown heading levels to reflect section structure.
+    • Preserve key formatting: headings, bullet points, code blocks, and any tables.
+    • Convert visually styled headers (surrounded by #, -, *, or similar characters) to proper Markdown format.
+    • Italicize journal names.
+    • Do not rephrase or rewrite the content. Preserve the original wording as closely as possible.
+    • Remove any characters or symbols that do not make sense in the context of Markdown.
+    • Do not wrap the final result in code blocks or triple backticks.
+
+Final Task:
+    • At the very end of the file, add a changelog entry: {current_date} – Standardized to Markdown.
+    • If there are any entries near the end of the file that begin with a date (in formats like YYYYMMDD, YYYY-MM-DD, or Month Year), treat them as part of a changelog and follow the same format.
+    • If no such entries exist, create a new changelog section  (but don't make a header) at the end of the file and begin with this entry.
 
 {readme_data['content']}
 """
